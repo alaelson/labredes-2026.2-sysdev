@@ -40,7 +40,7 @@ Abra o VirtualBox e clique em **Novo** (New) para criar a VM. Utilize os seguint
 * **Pasta da VM (Folder):** Selecione a pasta que você criou no passo anterior (`C:\2026.2\SysDevTech\VM\<NomeDoAluno>\ubuntu_server`).
 * **Tipo:** `Linux`
 * **Versão:** `Ubuntu (64-bit)`
-* **Memória RAM:** **512 MB**
+* **Memória RAM:** **768 MB** (Configure inicialmente com 1.5 GB, depois reduzir para 768 MB)
 * **Processador:** **1 CPU**
 * **Disco Rígido:**
   * Escolha a opção **Criar um novo disco rígido virtual agora**.
