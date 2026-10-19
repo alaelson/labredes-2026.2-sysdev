@@ -35,7 +35,10 @@ Os links abaixo apontam para os roteiros detalhados de cada prática realizada e
     *   Criação de grupos de trabalho e atribuição de membros.
     *   Configuração fina de permissões em diretórios compartilhados.
     *   Testes de controle de acesso local e isolamento de segurança.
-3.  *Aula 03: Interfaces e Endereçamento de Rede (Em breve)*
+3.  **[Aula 03: Interfaces e Endereçamento de Rede](Aula3.md)**
+    *   Inspeção de interfaces e rotas com `ip addr`, `ip link` e `ip route`.
+    *   Testes de conectividade em camadas com `ping` e `traceroute`.
+    *   Comparação entre os modos NAT e Placa em Ponte (Bridge) no VirtualBox.
 4.  *Aula 04: Configuração de Acesso Remoto Seguro com OpenSSH (Em breve)*
 5.  *Aula 05: Conectividade Avançada via Rede Host-Only no VirtualBox (Em breve)*
 6.  *Aula 06: Configuração de Nomes Estáticos de Host (Em breve)*
