@@ -63,3 +63,28 @@ Os links abaixo apontam para os roteiros detalhados de cada prática realizada e
 *   LACROIX, Jay. **Mastering Ubuntu Server**. 4. ed. Packt Publishing, 2023.
 *   SOYINKA, Wale. **Linux Administration: A Beginner's Guide**. 8. ed. McGraw-Hill, 2020 .
 *   KUROSE, James F.; ROSS, Keith W. **Redes de Computadores e a Internet**. 8. ed. Pearson, 2022.
+
+---
+
+## 📦 Estrutura do Repositório de Entrega do Aluno
+
+Cada aluno deve organizar o **seu próprio repositório** de entregas da seguinte forma:
+
+```text
+lsor-atividades/
+├── README.md               # Instruções gerais e identificação do aluno
+├── atividade-aula1.md      # Caderno de respostas da Aula 01
+├── atividade-aula2.md      # Caderno de respostas da Aula 02
+├── atividade-aula3.md      # Caderno de respostas da Aula 03
+└── imagens/                # Imagens de evidência técnica (capturas de tela)
+    ├── aula1_instalacao.png
+    ├── aula2_usuarios.png
+    ├── aula2_grupos.png
+    └── ... (demais capturas exigidas)
+```
+
+**Regras:**
+*   Um arquivo `atividade-aulaN.md` por aula (`N` = número da aula).
+*   Todas as capturas de tela ficam na pasta `imagens/`, nomeadas como `aulaN_descricao.png` (minúsculas, sem espaços ou acentos).
+*   Referencie as imagens no Markdown com caminho relativo: `![Descrição](imagens/aula2_usuarios.png)`.
+*   Cada resposta deve conter o comando executado, a saída obtida e a imagem de evidência correspondente.
