@@ -71,7 +71,7 @@ Os links abaixo apontam para os roteiros detalhados de cada prática realizada e
 Cada aluno deve organizar o **seu próprio repositório** de entregas da seguinte forma:
 
 ```text
-lsor-atividades/
+lsor-atividades-2026.2-<nomedoaluno>/
 ├── README.md               # Instruções gerais e identificação do aluno
 ├── atividade-aula1.md      # Caderno de respostas da Aula 01
 ├── atividade-aula2.md      # Caderno de respostas da Aula 02
@@ -84,6 +84,7 @@ lsor-atividades/
 ```
 
 **Regras:**
+*   O repositório deve se chamar `lsor-atividades-2026.2-<nomedoaluno>`, com `<nomedoaluno>` em minúsculas, sem acentos nem espaços, usando hífen quando necessário (ex.: `lsor-atividades-2026.2-joao-silva`).
 *   Um arquivo `atividade-aulaN.md` por aula (`N` = número da aula).
 *   Todas as capturas de tela ficam na pasta `imagens/`, nomeadas como `aulaN_descricao.png` (minúsculas, sem espaços ou acentos).
 *   Referencie as imagens no Markdown com caminho relativo: `![Descrição](imagens/aula2_usuarios.png)`.
