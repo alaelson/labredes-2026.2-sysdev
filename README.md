@@ -66,26 +66,26 @@ Os links abaixo apontam para os roteiros detalhados de cada prática realizada e
 
 ---
 
-## 📦 Student Submission Repository Structure
+## 📦 Estrutura do Repositório de Entrega do Aluno
 
-Each student must organize their **own repository** for submitting assignments as follows:
+Cada aluno deve organizar o **seu próprio repositório** de entregas da seguinte forma:
 
 ```text
-lsor-2026.2-sysdev-atividades-<studentname>/
-├── README.md               # General instructions and student identification
-├── atividade-aula1.md      # Answer notebook for Lesson 01
-├── atividade-aula2.md      # Answer notebook for Lesson 02
-├── atividade-aula3.md      # Answer notebook for Lesson 03
-└── imagens/                # Technical evidence images (screenshots)
+lsor-2026.2-sysdev-atividades-<nomedoaluno>/
+├── README.md               # Instruções gerais e identificação do aluno
+├── atividade-aula1.md      # Caderno de respostas da Aula 01
+├── atividade-aula2.md      # Caderno de respostas da Aula 02
+├── atividade-aula3.md      # Caderno de respostas da Aula 03
+└── imagens/                # Imagens de evidência técnica (capturas de tela)
     ├── aula1_instalacao.png
     ├── aula2_usuarios.png
     ├── aula2_grupos.png
-    └── ... (other required screenshots)
+    └── ... (demais capturas exigidas)
 ```
 
-**Rules:**
-*   The repository must be named `lsor-2026.2-sysdev-atividades-<studentname>`, with `<studentname>` in lowercase, without accents or spaces, using hyphens when necessary (e.g., `lsor-2026.2-sysdev-atividades-joao-silva`).
-*   One `atividade-aulaN.md` file per lesson (`N` = lesson number).
-*   All screenshots go in the `imagens/` folder, named `aulaN_description.png` (lowercase, no spaces or accents).
-*   Reference images in Markdown with a relative path: `![Description](imagens/aula2_usuarios.png)`.
-*   Each answer must contain the command executed, the output obtained, and the corresponding evidence image.
+**Regras:**
+*   O repositório deve se chamar `lsor-2026.2-sysdev-atividades-<nomedoaluno>`, com `<nomedoaluno>` em minúsculas, sem acentos nem espaços, usando hífen quando necessário (ex.: `lsor-2026.2-sysdev-atividades-joao-silva`).
+*   Um arquivo `atividade-aulaN.md` por aula (`N` = número da aula).
+*   Todas as capturas de tela ficam na pasta `imagens/`, nomeadas como `aulaN_descricao.png` (minúsculas, sem espaços ou acentos).
+*   Referencie as imagens no Markdown com caminho relativo: `![Descrição](imagens/aula2_usuarios.png)`.
+*   Cada resposta deve conter o comando executado, a saída obtida e a imagem de evidência correspondente.
