@@ -46,26 +46,6 @@ Os links abaixo apontam para os roteiros detalhados de cada prática realizada e
 
 ---
 
-
-
-## 🛠️ Dicas de Laboratório e Solução de Problemas
-
-*   **Teclado Desconfigurado no Console:** Caso o layout do seu teclado esteja incorreto no terminal virtual da VM, configure-o para o padrão brasileiro ABNT2 com o comando:
-    ```bash
-    sudo dpkg-reconfigure keyboard-configuration
-    ```
-*   **Isolamento no VirtualBox:** Ao realizar configurações de rede interna, lembre-se de que o modo *Host-Only* permite que a sua máquina real acesse a máquina virtual, mas impede que ela acesse a internet pública diretamente sem um serviço de NAT ou roteamento ativado.
-
----
-
-## 📖 Referências Bibliográficas Recomendadas
-
-*   LACROIX, Jay. **Mastering Ubuntu Server**. 4. ed. Packt Publishing, 2023.
-*   SOYINKA, Wale. **Linux Administration: A Beginner's Guide**. 8. ed. McGraw-Hill, 2020 .
-*   KUROSE, James F.; ROSS, Keith W. **Redes de Computadores e a Internet**. 8. ed. Pearson, 2022.
-
----
-
 ## 📦 Estrutura do Repositório de Entrega do Aluno
 
 Cada aluno deve organizar o **seu próprio repositório** de entregas da seguinte forma:
@@ -89,3 +69,22 @@ lsor-2026.2-sysdev-atividades-<nomedoaluno>/
 *   Todas as capturas de tela ficam na pasta `imagens/`, nomeadas como `aulaN_descricao.png` (minúsculas, sem espaços ou acentos).
 *   Referencie as imagens no Markdown com caminho relativo: `![Descrição](imagens/aula2_usuarios.png)`.
 *   Cada resposta deve conter o comando executado, a saída obtida e a imagem de evidência correspondente.
+
+---
+
+## 🛠️ Dicas de Laboratório e Solução de Problemas
+
+*   **Teclado Desconfigurado no Console:** Caso o layout do seu teclado esteja incorreto no terminal virtual da VM, configure-o para o padrão brasileiro ABNT2 com o comando:
+    ```bash
+    sudo dpkg-reconfigure keyboard-configuration
+    ```
+*   **Isolamento no VirtualBox:** Ao realizar configurações de rede interna, lembre-se de que o modo *Host-Only* permite que a sua máquina real acesse a máquina virtual, mas impede que ela acesse a internet pública diretamente sem um serviço de NAT ou roteamento ativado.
+
+---
+
+## 📖 Referências Bibliográficas Recomendadas
+
+*   LACROIX, Jay. **Mastering Ubuntu Server**. 4. ed. Packt Publishing, 2023.
+*   SOYINKA, Wale. **Linux Administration: A Beginner's Guide**. 8. ed. McGraw-Hill, 2020 .
+*   KUROSE, James F.; ROSS, Keith W. **Redes de Computadores e a Internet**. 8. ed. Pearson, 2022.
+
