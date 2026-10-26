@@ -39,7 +39,10 @@ Os links abaixo apontam para os roteiros detalhados de cada prática realizada e
     *   Inspeção de interfaces e rotas com `ip addr`, `ip link` e `ip route`.
     *   Testes de conectividade em camadas com `ping` e `traceroute`.
     *   Comparação entre os modos NAT e Placa em Ponte (Bridge) no VirtualBox.
-4.  *Aula 04: Configuração de Acesso Remoto Seguro com OpenSSH (Em breve)*
+4.  **[Aula 04: Acesso Remoto Seguro com OpenSSH e Redirecionamento de Portas](Aula4.md)**
+    *   Diagnóstico com `netplan`, `ifconfig`, `route -n`, `traceroute` e `w`.
+    *   Redirecionamento de portas no modo NAT (host `5222` → guest `22`).
+    *   Auditoria de portas com `netstat -an` e acesso via `ssh -p 5222`.
 5.  *Aula 05: Conectividade Avançada via Rede Host-Only no VirtualBox (Em breve)*
 6.  *Aula 06: Configuração de Nomes Estáticos de Host (Em breve)*
 7.  *Aula 07: Implantação de Rede Virtual Privada com OpenVPN (Em breve)*
@@ -56,10 +59,12 @@ lsor-2026.2-sysdev-atividades-<nomedoaluno>/
 ├── atividade-aula1.md      # Caderno de respostas da Aula 01
 ├── atividade-aula2.md      # Caderno de respostas da Aula 02
 ├── atividade-aula3.md      # Caderno de respostas da Aula 03
+├── atividade-aula4.md      # Relatório Técnico da Aula 04
 └── imagens/                # Imagens de evidência técnica (capturas de tela)
     ├── aula1_instalacao.png
     ├── aula2_usuarios.png
     ├── aula2_grupos.png
+    ├── aula4_netstat_listening.png
     └── ... (demais capturas exigidas)
 ```
 
