@@ -43,9 +43,14 @@ Os links abaixo apontam para os roteiros detalhados de cada prática realizada e
     *   Diagnóstico com `netplan`, `ifconfig`, `route -n`, `traceroute` e `w`.
     *   Redirecionamento de portas no modo NAT (host `5222` → guest `22`).
     *   Auditoria de portas com `netstat -an` e acesso via `ssh -p 5222`.
-5.  *Aula 05: Conectividade Avançada via Rede Host-Only no VirtualBox (Em breve)*
-6.  *Aula 06: Configuração de Nomes Estáticos de Host (Em breve)*
-7.  *Aula 07: Implantação de Rede Virtual Privada com OpenVPN (Em breve)*
+5.  **[Aula 05: Estrutura de Diretórios do Linux (FHS) e Pastas Departamentais com Permissões](Aula5.md)**
+    *   Função das pastas do padrão FHS (`/etc`, `/var`, `/srv`, `/tmp`, `/bin`, `/sbin`, `/home`).
+    *   Criação de diretórios aninhados com `mkdir -p` e grupos departamentais com `groupadd` e `usermod -aG`.
+    *   Isolamento de pastas com `chown` e permissões `770`/`660`.
+    *   Testes de acesso com `su -` e a diferença entre `su` e `su -`.
+6.  *Aula 06: Conectividade Avançada via Rede Host-Only no VirtualBox (Em breve)*
+7.  *Aula 07: Configuração de Nomes Estáticos de Host (Em breve)*
+8.  *Aula 08: Implantação de Rede Virtual Privada com OpenVPN (Em breve)*
 
 ---
 
@@ -60,11 +65,13 @@ lsor-2026.2-sysdev-atividades-<nomedoaluno>/
 ├── atividade-aula2.md      # Caderno de respostas da Aula 02
 ├── atividade-aula3.md      # Caderno de respostas da Aula 03
 ├── atividade-aula4.md      # Relatório Técnico da Aula 04
+├── atividade-aula5.md      # Relatório Técnico da Aula 05
 └── imagens/                # Imagens de evidência técnica (capturas de tela)
     ├── aula1_instalacao.png
     ├── aula2_usuarios.png
     ├── aula2_grupos.png
     ├── aula4_netstat_listening.png
+    ├── aula5_teste_b_cicrano.png
     └── ... (demais capturas exigidas)
 ```
 
