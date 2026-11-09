@@ -1,7 +1,7 @@
 # Laboratório de Sistemas Operacionais e Redes (LSOR)
 ## Curso Técnico em Desenvolvimento de Sistemas - 2026.02
 
-Repositório oficial para a organização e acompanhamento das práticas de laboratório da disciplina **Laboratório de Sistemas Operacionais e Redes (LSOR)** do curso de **Curso Técnico Integrado em Desenvolvimento de Sistemas** no **Instituto Federal de Alagoas (IFAL) - Campus Maceió**, para o semestre letivo **2026.02**.
+Repositório oficial para a organização e acompanhamento das práticas de laboratório da disciplina **Laboratório de Sistemas Operacionais e Redes (LSOR)** do **Curso Técnico Integrado em Desenvolvimento de Sistemas** no **Instituto Federal de Alagoas (IFAL) - Campus Maceió**, para o semestre letivo **2026.02**.
 
 Esta disciplina tem natureza eminentemente prática e aplicada, na qual cada conceito de redes e sistemas operacionais é transformado em configuração, teste, diagnóstico e documentação técnica.
 
@@ -11,14 +11,14 @@ Esta disciplina tem natureza eminentemente prática e aplicada, na qual cada con
 
 Para manter a padronização das práticas, a compatibilidade de redes e a segurança nos testes, adotamos as seguintes diretrizes de ambiente de hardware e credenciais:
 
-*   **Hipervisor:** [VirtualBox](https://www.virtualbox.org/) (com o respetivo *Extension Pack* instalado no hospedeiro) .
-*   **Sistema Operacional Guest:** Ubuntu Server 26.04 LTS (64-bit) .
-*   **Hardware Padrão da VM:** 512 MB de Memória RAM, 1 CPU Virtual e 32 GB de Disco Rígido (VDI, Alocação Dinâmica) .
+*   **Hipervisor:** [VirtualBox](https://www.virtualbox.org/) (com o respetivo *Extension Pack* instalado no hospedeiro).
+*   **Sistema Operacional Guest:** Ubuntu Server 26.04 LTS (64-bit).
+*   **Hardware Padrão da VM:** 768 MB de Memória RAM, 1 CPU Virtual e 32 GB de Disco Rígido (VDI, Alocação Dinâmica).
 
 
 ### 📁 Estrutura de Diretórios no Host (Windows do Laboratório)
-*   **Armazenamento de ISOs originais:** `C:\2026.2\SysDevTech\VM\original` .
-*   **Diretório de Trabalho do Aluno:** `C:\2026.2\SysDevTech\VM\<NomeDoAluno>` .
+*   **Armazenamento de ISOs originais:** `C:\2026.2\SysDevTech\VM\original`.
+*   **Diretório de Trabalho do Aluno:** `C:\2026.2\SysDevTech\VM\<NomeDoAluno>`.
 
 ---
 
@@ -27,9 +27,9 @@ Para manter a padronização das práticas, a compatibilidade de redes e a segur
 Os links abaixo apontam para os roteiros detalhados de cada prática realizada em laboratório. Cada roteiro contém as explicações conceituais, os comandos necessários e os testes de validação exigidos.
 
 1.  **[Aula 01: Instalação e Configuração Básica do Ubuntu Server](Aula1.md)**
-    *   Criação de VM no VirtualBox .
-    *   Particionamento avançado de disco usando LVM: `/` (29 GB), `/boot` (1 GB) e `SWAP` (2 GB) .
-    *   Primeiro boot, atualização de repositórios (`apt-get update`) e verificação de conectividade básica .
+    *   Criação de VM no VirtualBox.
+    *   Particionamento avançado de disco usando LVM: `/` (29 GB), `/boot` (1 GB) e `SWAP` (2 GB).
+    *   Primeiro boot, atualização de repositórios (`apt-get update`) e verificação de conectividade básica.
 2.  **[Aula 02: Administração de Usuários, Grupos e Permissões](Aula2.md)**
     *   Criação e gerenciamento de contas de usuários.
     *   Criação de grupos de trabalho e atribuição de membros.
@@ -91,5 +91,5 @@ lsor-2026.2-sysdev-atividades-<nomedoaluno>/
 ## 📖 Referências Bibliográficas Recomendadas
 
 *   LACROIX, Jay. **Mastering Ubuntu Server**. 4. ed. Packt Publishing, 2023.
-*   SOYINKA, Wale. **Linux Administration: A Beginner's Guide**. 8. ed. McGraw-Hill, 2020 .
+*   SOYINKA, Wale. **Linux Administration: A Beginner's Guide**. 8. ed. McGraw-Hill, 2020.
 *   KUROSE, James F.; ROSS, Keith W. **Redes de Computadores e a Internet**. 8. ed. Pearson, 2022.

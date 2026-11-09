@@ -26,7 +26,7 @@ As permissões básicas aplicadas a cada uma dessas três esferas são:
 
 ## 3. Roteiro Prático Passo a Passo
 
-> **Importante:** Para realizar esta prática, faça login com o usuário **`administrador`** e a senha **`adminifal`** configurados na Aula 1 [36]. Sempre que precisar de privilégios elevados, utilize o prefixo `sudo`.
+> **Importante:** Para realizar esta prática, faça login com o usuário **`administrador`** e a senha **`adminifal`** configurados na Aula 1. Sempre que precisar de privilégios elevados, utilize o prefixo `sudo`.
 
 ### Passo 1: Criação dos Novos Usuários no Sistema
 Nesta etapa, criaremos quatro novas contas de usuário que representarão colaboradores da nossa infraestrutura fictícia: `fulano`, `cicrano`, `beltrano` e `novato`.
@@ -34,7 +34,7 @@ Nesta etapa, criaremos quatro novas contas de usuário que representarão colabo
 Execute os comandos a seguir no console do seu servidor. O utilitário `adduser` criará automaticamente o diretório de início (`/home/<usuario>`), definirá o interpretador de comandos padrão (bash) e solicitará a criação de uma senha individual para cada conta.
 
 ```bash
-administrador@ubuntu_server:~$ sudo adduser fulano
+administrador@ubuntu-server:~$ sudo adduser fulano
 [sudo] password for administrador: 
 Adding user `fulano' ...
 Adding new group `fulano' (1001) ...
@@ -58,14 +58,14 @@ Is the information correct? [Y/n] Y
 
 Agora, repita o processo para os demais usuários:
 ```bash
-administrador@ubuntu_server:~$ sudo adduser cicrano
-administrador@ubuntu_server:~$ sudo adduser beltrano
-administrador@ubuntu_server:~$ sudo adduser novato
+administrador@ubuntu-server:~$ sudo adduser cicrano
+administrador@ubuntu-server:~$ sudo adduser beltrano
+administrador@ubuntu-server:~$ sudo adduser novato
 ```
 
 Para verificar se as contas foram criadas com sucesso no banco de dados local do Linux, você pode inspecionar as últimas linhas do arquivo `/etc/passwd`:
 ```bash
-administrador@ubuntu_server:~$ tail -n 4 /etc/passwd
+administrador@ubuntu-server:~$ tail -n 4 /etc/passwd
 fulano:x:1001:1001:Fulano de Tal,,,:/home/fulano:/bin/bash
 cicrano:x:1002:1002:,,,:/home/cicrano:/bin/bash
 beltrano:x:1003:1003:,,,:/home/beltrano:/bin/bash
@@ -78,21 +78,21 @@ novato:x:1004:1004:,,,:/home/novato:/bin/bash
 Para gerenciar permissões de forma escalável, os usuários devem ser agrupados por funções. Criaremos um grupo chamado `devs` que reunirá a equipe de desenvolvimento de software:
 
 ```bash
-administrador@ubuntu_server:~$ sudo groupadd devs
+administrador@ubuntu-server:~$ sudo groupadd devs
 ```
 
 Agora, adicionaremos os usuários `fulano`, `cicrano` e `beltrano` a este novo grupo utilizando o comando `usermod` com as flags `-a` (append/adicionar) e `-G` (group/grupo):
 ```bash
-administrador@ubuntu_server:~$ sudo usermod -aG devs fulano
-administrador@ubuntu_server:~$ sudo usermod -aG devs cicrano
-administrador@ubuntu_server:~$ sudo usermod -aG devs beltrano
+administrador@ubuntu-server:~$ sudo usermod -aG devs fulano
+administrador@ubuntu-server:~$ sudo usermod -aG devs cicrano
+administrador@ubuntu-server:~$ sudo usermod -aG devs beltrano
 ```
 
 > **Atenção:** Note que o usuário `novato` **não** deve ser adicionado ao grupo `devs`. Ele representará o perfil externo (Outros) que tentará acessar as pastas protegidas.
 
 Para validar se os usuários foram associados corretamente ao grupo, execute:
 ```bash
-administrador@ubuntu_server:~$ grep "devs" /etc/group
+administrador@ubuntu-server:~$ grep "devs" /etc/group
 devs:x:1005:fulano,cicrano,beltrano
 ```
 
@@ -102,12 +102,12 @@ devs:x:1005:fulano,cicrano,beltrano
 Criaremos uma pasta no diretório raiz do sistema chamada `/srv/projeto`. Esta pasta servirá como repositório de desenvolvimento comum do grupo de trabalho:
 
 ```bash
-administrador@ubuntu_server:~$ sudo mkdir -p /srv/projeto
+administrador@ubuntu-server:~$ sudo mkdir -p /srv/projeto
 ```
 
 Por padrão, uma pasta criada pelo usuário root (via `sudo`) pertence ao root. Vamos observar as permissões originais do diretório utilizando o comando `ls -ld`:
 ```bash
-administrador@ubuntu_server:~$ ls -ld /srv/projeto
+administrador@ubuntu-server:~$ ls -ld /srv/projeto
 drwxr-xr-x 2 root root 4096 Aug 12 11:30 /srv/projeto
 ```
 
@@ -124,17 +124,17 @@ Como o diretório `/srv/projeto` deve ser administrado pelo usuário `administra
 
 1. Altere o usuário dono para `administrador`:
 ```bash
-administrador@ubuntu_server:~$ sudo chown administrador /srv/projeto
+administrador@ubuntu-server:~$ sudo chown administrador /srv/projeto
 ```
 
 2. Altere o grupo associado para `devs`:
 ```bash
-administrador@ubuntu_server:~$ sudo chgrp devs /srv/projeto
+administrador@ubuntu-server:~$ sudo chgrp devs /srv/projeto
 ```
 
 Agora, valide a alteração das propriedades:
 ```bash
-administrador@ubuntu_server:~$ ls -ld /srv/projeto
+administrador@ubuntu-server:~$ ls -ld /srv/projeto
 drwxr-xr-x 2 administrador devs 4096 Aug 12 11:30 /srv/projeto
 ```
 
@@ -148,12 +148,12 @@ Queremos implementar a seguinte política de segurança no diretório `/srv/proj
 
 Para aplicar essa política usando a notação numérica/octal, utilizamos o comando `chmod 770`:
 ```bash
-administrador@ubuntu_server:~$ sudo chmod 770 /srv/projeto
+administrador@ubuntu-server:~$ sudo chmod 770 /srv/projeto
 ```
 
 Valide as novas permissões aplicadas:
 ```bash
-administrador@ubuntu_server:~$ ls -ld /srv/projeto
+administrador@ubuntu-server:~$ ls -ld /srv/projeto
 drwxrwx--- 2 administrador devs 4096 Aug 12 11:30 /srv/projeto
 ```
 A máscara de permissões mudou para `drwxrwx---`, confirmando o isolamento absoluto de qualquer usuário externo ao grupo!
@@ -163,19 +163,19 @@ A máscara de permissões mudou para `drwxrwx---`, confirmando o isolamento abso
 ### Passo 6: Criação de Arquivos de Teste
 Ainda utilizando seu usuário `administrador`, crie um arquivo de notas dentro de `/srv/projeto`:
 ```bash
-administrador@ubuntu_server:~$ echo "Especificacao tecnica do roteador de borda" > /srv/projeto/config_redes.txt
+administrador@ubuntu-server:~$ echo "Especificacao tecnica do roteador de borda" > /srv/projeto/config_redes.txt
 ```
 
 Verifique se o arquivo foi criado e observe suas propriedades e permissões de herança padrão:
 ```bash
-administrador@ubuntu_server:~$ ls -l /srv/projeto/config_redes.txt
+administrador@ubuntu-server:~$ ls -l /srv/projeto/config_redes.txt
 -rw-r--r-- 1 administrador devs 42 Aug 12 11:30 /srv/projeto/config_redes.txt
 ```
 
 Para garantir que qualquer membro do grupo de desenvolvimento possa editar este arquivo, aplique a permissão octal `660` (Dono e Grupo leem e escrevem; Outros não fazem nada) no arquivo:
 ```bash
-administrador@ubuntu_server:~$ chmod 660 /srv/projeto/config_redes.txt
-administrador@ubuntu_server:~$ ls -l /srv/projeto/config_redes.txt
+administrador@ubuntu-server:~$ chmod 660 /srv/projeto/config_redes.txt
+administrador@ubuntu-server:~$ ls -l /srv/projeto/config_redes.txt
 -rw-rw---- 1 administrador devs 42 Aug 12 11:30 /srv/projeto/config_redes.txt
 ```
 
@@ -188,23 +188,23 @@ Para testar o funcionamento das permissões sem precisar sair fisicamente da sua
 ### Teste A: Validação com Usuário do Grupo (`fulano`)
 1. Alterne para a sessão do usuário `fulano`:
 ```bash
-administrador@ubuntu_server:~$ su - fulano
+administrador@ubuntu-server:~$ su - fulano
 Password: <digite a senha que configurou no Passo 1>
-fulano@ubuntu_server:~$ 
+fulano@ubuntu-server:~$ 
 ```
 
 2. Tente navegar até a pasta e visualizar o arquivo de configuração:
 ```bash
-fulano@ubuntu_server:~$ cd /srv/projeto
-fulano@ubuntu_server:/srv/projeto$ ls -l
+fulano@ubuntu-server:~$ cd /srv/projeto
+fulano@ubuntu-server:/srv/projeto$ ls -l
 total 4
 -rw-rw---- 1 administrador devs 42 Aug 12 11:30 config_redes.txt
 ```
 
 3. Tente adicionar uma linha de comentários ao arquivo (Escrita):
 ```bash
-fulano@ubuntu_server:/srv/projeto$ echo "Revisado por Fulano" >> config_redes.txt
-fulano@ubuntu_server:/srv/projeto$ cat config_redes.txt
+fulano@ubuntu-server:/srv/projeto$ echo "Revisado por Fulano" >> config_redes.txt
+fulano@ubuntu-server:/srv/projeto$ cat config_redes.txt
 Especificacao tecnica do roteador de borda
 Revisado por Fulano
 ```
@@ -212,9 +212,9 @@ Revisado por Fulano
 
 4. Saia da sessão do usuário atual para retornar ao administrador:
 ```bash
-fulano@ubuntu_server:/srv/projeto$ exit
+fulano@ubuntu-server:/srv/projeto$ exit
 logout
-administrador@ubuntu_server:~$ 
+administrador@ubuntu-server:~$ 
 ```
 
 ---
@@ -222,29 +222,29 @@ administrador@ubuntu_server:~$
 ### Teste B: Validação com Usuário Externo (`novato`)
 1. Alterne para o usuário `novato`:
 ```bash
-administrador@ubuntu_server:~$ su - novato
+administrador@ubuntu-server:~$ su - novato
 Password: <digite a senha que configurou no Passo 1>
-novato@ubuntu_server:~$ 
+novato@ubuntu-server:~$ 
 ```
 
 2. Tente navegar até a pasta protegida `/srv/projeto` (Execução):
 ```bash
-novato@ubuntu_server:~$ cd /srv/projeto
+novato@ubuntu-server:~$ cd /srv/projeto
 -bash: cd: /srv/projeto: Permission denied
 ```
 
 3. Tente listar os arquivos internos mesmo sem entrar na pasta (Leitura):
 ```bash
-novato@ubuntu_server:~$ ls -l /srv/projeto
+novato@ubuntu-server:~$ ls -l /srv/projeto
 ls: cannot open directory '/srv/projeto': Permission denied
 ```
 *Sucesso! O sistema negou completamente o acesso ao usuário `novato` conforme as regras de controle estabelecidas no passo 5.*
 
 4. Saia do terminal para voltar ao administrador:
 ```bash
-novato@ubuntu_server:~$ exit
+novato@ubuntu-server:~$ exit
 logout
-administrador@ubuntu_server:~$ 
+administrador@ubuntu-server:~$ 
 ```
 
 ---

@@ -1,6 +1,6 @@
 # Aula 01 - Introdução à Virtualização e Instalação do Ubuntu Server 26.04
 
-Este roteiro faz parte do repositório de aulas práticas **labredes-SysDev-2026.02** da disciplina de Laboratório de Sistemas Operacionais e Redes (LSOR) do Bacharelado em Sistemas de Informação.
+Este roteiro faz parte do repositório de aulas práticas **labredes-2026.2-sysdev** da disciplina de Laboratório de Sistemas Operacionais e Redes (LSOR) do Curso Técnico Integrado em Desenvolvimento de Sistemas.
 
 ---
 
@@ -27,7 +27,7 @@ Antes de abrir o VirtualBox, você deve garantir que a estrutura de diretórios 
    * **Caminho:** `C:\2026.2\SysDevTech\VM\<NomeDoAluno>`
    * *Substitua `<NomeDoAluno>` pelo seu primeiro e último nome (ex: `C:\2026.2\SysDevTech\VM\JoaoSilva`).*
 4. Dentro da sua pasta, crie um diretório específico para esta máquina:
-   * **Caminho:** `C:\2026.2\SysDevTech\VM\<NomeDoAluno>\ubuntu_server`
+   * **Caminho:** `C:\2026.2\SysDevTech\VM\<NomeDoAluno>\ubuntu-server`
 
 
 
@@ -36,8 +36,8 @@ Antes de abrir o VirtualBox, você deve garantir que a estrutura de diretórios 
 ## 3. Criação da Máquina Virtual no VirtualBox
 Abra o VirtualBox e clique em **Novo** (New) para criar a VM. Utilize os seguintes parâmetros técnicos:
 
-* **Nome:** `ubuntu_server`
-* **Pasta da VM (Folder):** Selecione a pasta que você criou no passo anterior (`C:\2026.2\SysDevTech\VM\<NomeDoAluno>\ubuntu_server`).
+* **Nome:** `ubuntu-server`
+* **Pasta da VM (Folder):** Selecione a pasta que você criou no passo anterior (`C:\2026.2\SysDevTech\VM\<NomeDoAluno>\ubuntu-server`).
 * **Tipo:** `Linux`
 * **Versão:** `Ubuntu (64-bit)`
 * **Memória RAM:** **768 MB** (Configure inicialmente com 1.5 GB, depois reduzir para 768 MB)
@@ -53,7 +53,7 @@ Abra o VirtualBox e clique em **Novo** (New) para criar a VM. Utilize os seguint
 ## 4. Configurações Finais pré-Boot
 Antes de iniciar a máquina pela primeira vez:
 
-1. Selecione a VM `ubuntu_server` e clique em **Configurações** (Settings).
+1. Selecione a VM `ubuntu-server` e clique em **Configurações** (Settings).
 2. Vá em **Armazenamento** (Storage).
 3. Selecione a controladora IDE (Disco Óptico Vazio).
 4. No painel lateral direito, clique no ícone do CD e selecione **Escolher um arquivo de disco...** (Choose a virtual optical disk file).
@@ -82,31 +82,34 @@ Inicie a VM e siga as instruções abaixo detalhadamente:
 Para fins de aprendizado e flexibilidade de administração, **NÃO** utilizaremos o particionamento automático padrão. Siga os passos para configurar o particionamento via LVM manualmente:
 
 1. Na tela de *Filesystem setup*, selecione a opção **Custom storage layout** (ou manual) e selecione **Done**.
-2. Na tela de resumo de dispositivos, selecione o disco livre de **32 GB** e escolha a opção para criar a estrutura LVM.
-3. Crie exatamente **3 partições** com as seguintes especificações:
-   * **Partição 1 (/boot):**
-     * **Tamanho:** `1 GB` (1.000M)
+2. Na tela de resumo de dispositivos, selecione o disco livre de **32 GB** e monte o esquema abaixo. O `/boot` fica em uma partição comum, fora do LVM; o restante do disco vira um **Grupo de Volumes (Volume Group)**, dentro do qual criamos os **Volumes Lógicos** do `/` e da swap:
+   * **Partição de Boot (/boot)** — partição comum, fora do LVM:
+     * **Tamanho:** `1 GB` (1024M)
      * **Formato:** `ext4`
      * **Ponto de Montagem (Mount):** `/boot`
-   * **Partição 2 (Root /):**
+   * **Grupo de Volumes LVM (`ubuntu-vg`):**
+     * Crie o Volume Group com todo o espaço livre restante do disco.
+   * **Volume Lógico Root (/)** — dentro do `ubuntu-vg`:
+     * **Nome:** `ubuntu-lv`
      * **Tamanho:** `29 GB`
      * **Formato:** `ext4`
      * **Ponto de Montagem (Mount):** `/`
-   * **Partição 3 (SWAP):**
-     * **Tamanho:** `2 GB`
+   * **Volume Lógico Swap** — dentro do `ubuntu-vg`:
+     * **Nome:** `swap-lv`
+     * **Tamanho:** `2 GB` (ou todo o espaço livre restante, cerca de 2 GB)
      * **Formato:** `swap`
-     * *(A memória SWAP funciona como área de troca de memória RAM no disco).*
-4. Revise o sumário das partições criadas. Certifique-se de que correspondem aos tamanhos exatos acima.
-5. Selecione **Done**, confirme o aviso de destruição de dados no disco e prossiga.
+     * *(A swap é uma área do disco usada como extensão da memória RAM quando ela fica cheia.)*
+3. Revise o sumário: uma partição `/boot` de 1 GB e, no grupo `ubuntu-vg`, os volumes lógicos `/` (29 GB) e swap (cerca de 2 GB).
+4. Selecione **Done**, confirme o aviso de destruição de dados no disco e prossiga.
 
 ### 5.4. Configuração do Perfil de Usuário (Profile Setup)
 Preencha os dados do administrador do sistema seguindo estritamente as definições da turma:
 
 * **Your name:** `Administrador`
-* **Your server's name:** `ubuntu_server`
+* **Your server's name:** `ubuntu-server`
 * **Pick a username:** `administrador`
-* **Choose a passworC:** `adminifal`
-* **Confirm your passworC:** `adminifal`
+* **Choose a password:** `adminifal`
+* **Confirm your password:** `adminifal`
 
 *Atenção: Não utilize o usuário padrão antigo 'redes'. Toda a administração a partir de agora será conduzida sob o usuário 'administrador'.*
 

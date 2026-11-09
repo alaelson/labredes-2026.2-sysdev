@@ -4,6 +4,8 @@ Nesta prática você configurará o acesso remoto via **SSH (Secure Shell)** à 
 
 **Pré-requisitos:** Aulas 01 a 03 concluídas (VM instalada, usuário `administrador`, VM em modo **NAT** com IP `10.0.2.15`).
 
+> **Com o Adaptador 1 em modo NAT:** se você terminou a Aula 3 com a VM em **Placa em Ponte (Bridge)**, desligue a VM (`sudo poweroff`) e, no VirtualBox, volte em **Configurações > Rede > Adaptador 1 > Conectado a: NAT** antes de começar. Todo este roteiro pressupõe o modo NAT, em que a VM recebe o IP `10.0.2.15` e o gateway é `10.0.2.2`.
+
 ---
 
 ## 1. Fundamentos
@@ -30,22 +32,22 @@ Acesse a VM com o usuário `administrador`.
 
 ### Passo 1: Estado da rede
 ```bash
-administrador@ubuntu_server:~$ netplan status
+administrador@ubuntu-server:~$ netplan status
 ```
 A interface `enp0s3` deve estar com DHCP e IP `10.0.2.15/24`.
 
 ### Passo 2: Verificar o OpenSSH e instalar utilitários
 ```bash
-administrador@ubuntu_server:~$ dpkg -l | grep openssh-server
-administrador@ubuntu_server:~$ sudo apt update
-administrador@ubuntu_server:~$ sudo apt install -y openssh-server net-tools traceroute
-administrador@ubuntu_server:~$ systemctl status ssh
+administrador@ubuntu-server:~$ dpkg -l | grep openssh-server
+administrador@ubuntu-server:~$ sudo apt update
+administrador@ubuntu-server:~$ sudo apt install -y openssh-server net-tools traceroute
+administrador@ubuntu-server:~$ systemctl status ssh
 ```
 O serviço `ssh` deve estar `active (running)`.
 
 ### Passo 3: Interfaces com `ifconfig`
 ```bash
-administrador@ubuntu_server:~$ ifconfig
+administrador@ubuntu-server:~$ ifconfig
 ```
 * `inet 10.0.2.15`: IPv4 da VM; `netmask 255.255.255.0`: equivale a `/24`.
 * `ether ...`: MAC da placa virtual.
@@ -53,19 +55,19 @@ administrador@ubuntu_server:~$ ifconfig
 
 ### Passo 4: Gateway padrão
 ```bash
-administrador@ubuntu_server:~$ route -n
+administrador@ubuntu-server:~$ route -n
 ```
 `-n` mostra endereços numéricos (sem DNS). A linha `0.0.0.0` aponta o gateway `10.0.2.2` via `enp0s3`.
 
 ### Passo 5: Rastreamento
 ```bash
-administrador@ubuntu_server:~$ traceroute 8.8.8.8
+administrador@ubuntu-server:~$ traceroute 8.8.8.8
 ```
 O salto 1 deve ser `10.0.2.2`.
 
 ### Passo 6: Sessões ativas
 ```bash
-administrador@ubuntu_server:~$ w
+administrador@ubuntu-server:~$ w
 ```
 Antes do SSH, só aparece o console local (`tty1`).
 
@@ -89,7 +91,7 @@ PS C:\Users\Aluno> netstat -an | findstr 5222
 
 ## 4. Redirecionamento de Portas no VirtualBox
 
-1. Selecione a VM `ubuntu_server` > **Configurações** (`Ctrl + S`) > **Rede**.
+1. Selecione a VM `ubuntu-server` > **Configurações** (`Ctrl + S`) > **Rede**.
 2. **Adaptador 1** (NAT) > **Avançado** > **Redirecionamento de Portas**.
 3. Clique em **`+`** e preencha:
 
@@ -126,7 +128,7 @@ Esperado: além do `LISTENING`, linhas `ESTABLISHED` entre `127.0.0.1:5222` e a 
 
 ### Passo 12: `w` dentro da sessão SSH
 ```bash
-administrador@ubuntu_server:~$ w
+administrador@ubuntu-server:~$ w
 ```
 Esperado: `tty1` (console) e `pts/0` (pseudo-terminal da sessão SSH), com `FROM` = `10.0.2.2` (gateway NAT). Encerre com `exit`.
 
