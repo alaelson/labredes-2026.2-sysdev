@@ -54,6 +54,16 @@ Os links abaixo apontam para os roteiros detalhados de cada prática realizada e
 
 ---
 
+## 🎥 Vídeos de Apoio
+
+Vídeos do canal do professor com operações com máquinas virtuais no VirtualBox. Use-os para revisar a criação e o gerenciamento das VMs no seu ritmo:
+
+*   [Vídeo 1 — operações com VMs no VirtualBox](https://youtu.be/z7BRXpNnCgA)
+*   [Vídeo 2 — operações com VMs no VirtualBox](https://youtu.be/r0rZ58JTll0)
+*   [Vídeo 3 — operações com VMs no VirtualBox](https://youtu.be/Js6yI43LvPU)
+
+---
+
 ## 📦 Estrutura do Repositório de Entrega do Aluno
 
 Cada aluno deve organizar o **seu próprio repositório** de entregas da seguinte forma:
@@ -91,6 +101,7 @@ lsor-2026.2-sysdev-atividades-<nomedoaluno>/
     ```bash
     sudo dpkg-reconfigure keyboard-configuration
     ```
+*   **VMs clonadas:** Ao clonar uma VM no VirtualBox, escolha a opção de gerar novos endereços MAC para as placas de rede. Duas VMs com o mesmo MAC no mesmo switch não se comunicam corretamente.
 *   **Isolamento no VirtualBox:** Ao realizar configurações de rede interna, lembre-se de que o modo *Host-Only* permite que a sua máquina real acesse a máquina virtual, mas impede que ela acesse a internet pública diretamente sem um serviço de NAT ou roteamento ativado.
 
 ---
