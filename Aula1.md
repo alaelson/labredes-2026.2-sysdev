@@ -135,3 +135,7 @@ Após o reinício completo da máquina virtual:
 3. Digite a senha `adminifal` quando solicitado pelo `sudo`.
 4. Instale o **VirtualBox Extension Pack** no computador hospedeiro (se ainda não o tiver) acessando o site oficial: [virtualbox.org/wiki/Downloads](https://www.virtualbox.org/wiki/Downloads).
 
+---
+
+## 7. Vídeos de Apoio
+Para revisar a criação e as operações com VMs no VirtualBox, assista aos [vídeos de apoio](README.md#-vídeos-de-apoio) listados no README do repositório.
