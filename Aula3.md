@@ -32,30 +32,30 @@ Ao final desta prática, você será capaz de:
 
 ### Passo 1: Inspeção das Interfaces e Rotas
 ```bash
-administrador@ubuntu_server:~$ ip addr show
-administrador@ubuntu_server:~$ ip link
-administrador@ubuntu_server:~$ ip route
-administrador@ubuntu_server:~$ netplan status
+administrador@ubuntu-server:~$ ip addr show
+administrador@ubuntu-server:~$ ip link
+administrador@ubuntu-server:~$ ip route
+administrador@ubuntu-server:~$ netplan status
 ```
 Anote em uma tabela: nome da interface, IP/prefixo, MAC e gateway padrão (linha `default via ...` do `ip route`).
 
 ### Passo 2: Testes de Conectividade em Camadas
 Teste do mais próximo ao mais distante. Se uma etapa falhar, o problema está naquela camada.
 ```bash
-administrador@ubuntu_server:~$ ping -c 4 127.0.0.1
-administrador@ubuntu_server:~$ ping -c 4 <IP-da-sua-VM>
-administrador@ubuntu_server:~$ ping -c 4 10.0.2.2
-administrador@ubuntu_server:~$ ping -c 4 8.8.8.8
-administrador@ubuntu_server:~$ ping -c 4 google.com
+administrador@ubuntu-server:~$ ping -c 4 127.0.0.1
+administrador@ubuntu-server:~$ ping -c 4 <IP-da-sua-VM>
+administrador@ubuntu-server:~$ ping -c 4 10.0.2.2
+administrador@ubuntu-server:~$ ping -c 4 8.8.8.8
+administrador@ubuntu-server:~$ ping -c 4 google.com
 ```
 * Falha em `8.8.8.8`: problema de gateway/rota.
 * Funciona com `8.8.8.8`, mas falha com `google.com`: problema de DNS.
 
 ### Passo 3: Rastreamento de Rotas
 ```bash
-administrador@ubuntu_server:~$ sudo apt update
-administrador@ubuntu_server:~$ sudo apt install -y traceroute
-administrador@ubuntu_server:~$ traceroute 8.8.8.8
+administrador@ubuntu-server:~$ sudo apt update
+administrador@ubuntu-server:~$ sudo apt install -y traceroute
+administrador@ubuntu-server:~$ traceroute 8.8.8.8
 ```
 O salto 1 deve ser o gateway do VirtualBox (`10.0.2.2`).
 
@@ -64,13 +64,13 @@ O salto 1 deve ser o gateway do VirtualBox (`10.0.2.2`).
 2. No VirtualBox: **Configurações > Rede > Adaptador 1 > Conectado a: Placa em Ponte** e selecione a interface física do host.
 3. Inicie a VM e repita o Passo 1:
 ```bash
-administrador@ubuntu_server:~$ ip addr show
-administrador@ubuntu_server:~$ ip route
-administrador@ubuntu_server:~$ ping -c 4 8.8.8.8
+administrador@ubuntu-server:~$ ip addr show
+administrador@ubuntu-server:~$ ip route
+administrador@ubuntu-server:~$ ping -c 4 8.8.8.8
 ```
 4. Compare IP, gateway e rotas com os valores do modo NAT.
 
-> Se o IP não for atribuído por DHCP, informe ao professor: a faixa de IPs livres do laboratório será fornecida em aula.
+> Se a VM não receber um IP por DHCP no modo Placa em Ponte, não se preocupe: a rede do laboratório nem sempre entrega endereços automaticamente. Estudaremos a configuração de **IP estático** (Netplan) justamente para esses casos. Por enquanto, registre no relatório o que aconteceu (saída de `ip addr show`) e siga para o Passo 5.
 
 ### Passo 5: Comparação com o Host Windows
 No **PowerShell** do host:
