@@ -54,6 +54,12 @@ Os links abaixo apontam para os roteiros detalhados de cada prática realizada e
 
 ---
 
+## 📝 Avaliações
+
+*   **[Avaliação 2 — Prática (VirtualBox e Linux básico)](https://github.com/alaelson/lsor_sysdev_2026.2_avaliacao2)**: individual. Leia o README do repositório, crie a sua cópia com **"Use this template"** (repositório privado) e adicione o professor (`alaelson`) como colaborador. Conteúdo: Aulas 01 a 05.
+
+---
+
 ## 🎥 Vídeos de Apoio
 
 Vídeos do canal do professor com operações com máquinas virtuais no VirtualBox. Use-os para revisar a criação e o gerenciamento das VMs no seu ritmo:
