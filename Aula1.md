@@ -20,7 +20,7 @@ Antes de abrir o VirtualBox, você deve garantir que a estrutura de diretórios 
    * **Caminho:** `C:\2026.2\SysDevTech\VM\original`
 2. Certifique-se de que o arquivo de imagem do sistema operacional está presente nesta pasta:
    * **Arquivo:** `ubuntu-26.04-live-server-amd64.iso`
-   * **Servidor de Arquivos da Rede (Acesso a ISO):** `\\172.20.22.21\public`
+   * **Servidor de Arquivos da Rede (Acesso a ISO):** `\\172.20.20.21\public`
      usuário: alunoifal
      senha: alunoifal
 3. Crie a sua pasta de trabalho individual onde todos os arquivos da sua VM serão armazenados:
