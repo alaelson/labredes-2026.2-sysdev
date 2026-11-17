@@ -195,7 +195,45 @@ Se a VM não subir ou ficar sem rede, restaure o snapshot `antes-da-limpeza` e p
 
 Não mexa no swap. Na instalação do laboratório, ele é o volume lógico `swap-lv`, de cerca de 2 GB, e o disco virtual dinâmico só ocupa espaço no Windows pela parte do swap que já foi usada de fato. Com só 768 MB de RAM na VM, o swap é importante para o sistema não ficar sem memória.
 
-### 4.5 Confira o resultado
+### 4.5 Snaps e atualizador de firmware
+
+O **snap** é um formato de pacote da Canonical, gerenciado pelo serviço `snapd`, que traz o programa junto com as bibliotecas de que ele precisa. O Ubuntu Server já vem com alguns snaps instalados que não são usados nas práticas, como os `core` (sistema base dos snaps), o `lxd` (gerenciador de contêineres) e o `hwctl` (ferramenta de certificação de hardware). Na VM de teste do Ubuntu 26.04, remover o `snapd` liberou perto de **1 GB**.
+
+**Passo 1.** Veja os snaps instalados:
+
+```bash
+snap list
+```
+
+Se aparecerem só snaps de base ou de sistema (como `core20`, `core22`, `core24`, `snapd`, `lxd` ou `hwctl`), pode remover o `snapd`. Se aparecer algum programa usado nas aulas, pule esta seção.
+
+**Passo 2.** Remova o `snapd` e, com ele, todos os snaps:
+
+```bash
+sudo apt purge snapd
+```
+
+> ⚠️ **Leia a lista antes de confirmar.** Se aparecer o metapacote `ubuntu-server`, responda `n`: removê-lo faria o `autoremove` levar muitas ferramentas do sistema.
+
+**Passo 3.** Apague a pasta de snaps da pasta pessoal:
+
+```bash
+rm -rf ~/snap
+```
+
+**Passo 4.** Remova o `fwupd`, o atualizador de firmware de hardware físico (BIOS, SSD, etc.), que não tem uso numa VM:
+
+```bash
+sudo apt purge fwupd
+```
+
+**Passo 5.** Remova as dependências que sobraram, lendo a lista antes de confirmar:
+
+```bash
+sudo apt autoremove --purge
+```
+
+### 4.6 Confira o resultado
 
 ```bash
 df -h /
@@ -327,6 +365,7 @@ Para usar a VM em outro PC: *Arquivo → Importar Appliance*, selecione o `.ova`
 - [ ] `apt clean` e `journalctl --vacuum-size`
 - [ ] Kernel em uso conferido com `uname -r`; kernels antigos removidos
 - [ ] (Opcional) Firmware removido, reboot e rede conferidos
+- [ ] Snaps (`snapd`) e `fwupd` removidos, se não usados
 - [ ] `dd` de zeros na raiz (e no `/boot`, se separado) + `rm` do arquivo
 - [ ] Histórico apagado e VM desligada
 - [ ] `VBoxManage ... --compact` no `.vdi`
