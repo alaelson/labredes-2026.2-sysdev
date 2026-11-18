@@ -212,7 +212,7 @@ teste_pasta(){
       ok "O usuário 'novato' é bloqueado em $PASTA"
     fi
   else
-    info "Usuário 'novato' não existe; teste de bloqueio não realizado"
+    falha "Usuário 'novato' não existe; crie-o com sudo adduser novato para testar o bloqueio"
   fi
 }
 
