@@ -344,13 +344,13 @@ Depois de compactar, tire um novo snapshot da VM: `vm-limpa`.
 Com a VM reduzida, o `.ova` fica pequeno o bastante para caber num pendrive ou ser enviado para a nuvem como backup.
 
 1. Com a VM desligada, vá em *Arquivo → Exportar Appliance* e selecione a VM `ubuntu-server`.
-2. Formato **OVF 2.0** e nome `ubuntu-server.ova`.
+2. Formato **OVF 2.0** e nome `ubuntu-server.ova`, salvo em `C:\2026.2\SysDevTech\VM\backup`.
 3. Em **Política de endereço MAC**, escolha **Remover todos os endereços MAC das placas de rede**, para a VM receber endereços novos quando for importada em outro PC.
 
-Gere o *hash* do arquivo no PowerShell, para conferir se a cópia chegou íntegra:
+Gere o *hash* do arquivo no PowerShell, com o **caminho completo** do `.ova` (o PowerShell pode estar em outra pasta, como a do VirtualBox), para conferir se a cópia chegou íntegra:
 
 ```powershell
-Get-FileHash .\ubuntu-server.ova -Algorithm SHA256
+Get-FileHash 'C:\2026.2\SysDevTech\VM\backup\ubuntu-server.ova' -Algorithm SHA256
 ```
 
 O **hash SHA-256** é uma "impressão digital" do arquivo. Se um único bit mudar, o hash muda, então dá para comparar a cópia com o original.
