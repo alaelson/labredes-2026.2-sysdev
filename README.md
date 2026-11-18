@@ -108,6 +108,7 @@ lsor-2026.2-sysdev-atividades-<nomedoaluno>/
     sudo dpkg-reconfigure keyboard-configuration
     ```
 *   **VMs clonadas:** Ao clonar uma VM no VirtualBox, escolha a opção de gerar novos endereços MAC para as placas de rede. Duas VMs com o mesmo MAC no mesmo switch não se comunicam corretamente.
+*   **VM menor (dica para o Projeto):** o [roteiro de redução da VM](Roteiro-Reduzir-VM.md) mostra como limpar a VM, encher o espaço livre com zeros e compactar o disco. Assim o `.ova` fica pequeno (cerca de 1 GB), fácil de guardar como backup ou de levar para outro PC.
 *   **Isolamento no VirtualBox:** Ao realizar configurações de rede interna, lembre-se de que o modo *Host-Only* permite que a sua máquina real acesse a máquina virtual, mas impede que ela acesse a internet pública diretamente sem um serviço de NAT ou roteamento ativado.
 
 ---
