@@ -38,7 +38,7 @@ Antes de usar os comandos, é preciso entender o que cada coisa é.
 ## 2. Antes de começar
 
 1. Faça todas as atividades e instalações de pacotes **antes** da limpeza. Se instalar algo depois, repita as seções 5 e 6.
-1. **Faça um snapshot** da VM: *Máquina → Tirar Snapshot*, com o nome `antes-da-limpeza`. Se algo der errado, basta restaurá-lo.
+1. **Faça um snapshot** da VM: *Máquina → Tirar Snapshot*, com o nome `antes-da-limpeza`. Se algo der errado na limpeza (seção 4), basta restaurá-lo. Ele será **apagado no início da seção 5**, antes de zerar o espaço livre.
 1. Tenha à mão o caminho do disco da VM. No VirtualBox, abra *Configurações → Armazenamento*, clique no disco e veja o campo **Localização**. Exemplo: `C:\2026.2\SysDevTech\VM\<NomeDoAluno>\ubuntu-server\ubuntu-server.vdi`.
 
 ---
@@ -189,7 +189,7 @@ ip -c -4 a
 
 Se a VM não subir ou ficar sem rede, restaure o snapshot `antes-da-limpeza` e pule esta seção.
 
-> ℹ️ Sem o metapacote `linux-generic`, o `apt upgrade` deixa de instalar kernels novos. Para VMs de prática, isso não é problema. Para voltar ao comportamento normal, use `sudo apt install linux-generic`.
+> ⚠️ Sem o metapacote `linux-generic`, o `apt upgrade` deixa de instalar kernels novos, **inclusive as correções de segurança do kernel**. A VM continua recebendo as atualizações dos demais pacotes. Numa VM de prática na rede do laboratório o risco é baixo, mas não é zero, porque ela fica ligada à rede com um servidor SSH. Se a VM for usada por muito tempo (mais de um semestre), reinstale o metapacote com `sudo apt install linux-generic` (o firmware volta junto) ou refaça a base a partir de uma instalação atualizada no início de cada semestre.
 
 ### 4.4 E o swap?
 
@@ -245,15 +245,23 @@ df -h /
 
 Este é o passo que mais reduz o tamanho final.
 
+**Passo 0. Apague o snapshot `antes-da-limpeza`.** Confira antes se a VM inicia e tem rede depois da limpeza. Enquanto o snapshot existir, tudo o que for gravado (inclusive os zeros) vai para um **disco diferencial**, e o disco principal (`.vdi`) não diminui na compactação. Com a VM desligada: *Máquina → Ferramentas → Snapshots*, selecione `antes-da-limpeza` e clique em **Excluir**. O VirtualBox junta o disco diferencial ao principal; depois, ligue a VM de novo.
+
 > ⚠️ **Espaço no Windows.** Enquanto o `dd` enche a raiz de zeros, o arquivo `.vdi` cresce até quase o tamanho da raiz (cerca de **29 GB** na instalação do laboratório). Antes de começar, confira se o disco `C:` do PC tem **pelo menos 32 GB livres**. O espaço volta depois da compactação (seção 6).
 
-**Passo 1.** Limpe o cache de pacotes mais uma vez:
+**Passo 1.** Apague o histórico de comandos do root e dos usuários **antes** de zerar, para que os blocos onde ele estava gravado também sejam preenchidos com zeros (o histórico pode conter senhas digitadas por engano):
+
+```bash
+sudo rm -f /root/.bash_history /home/*/.bash_history
+```
+
+**Passo 2.** Limpe o cache de pacotes mais uma vez:
 
 ```bash
 sudo apt clean
 ```
 
-**Passo 2.** Encha o espaço livre com zeros. `bs=1M` copia em blocos de 1 MB e `status=progress` mostra o andamento:
+**Passo 3.** Encha o espaço livre com zeros. `bs=1M` copia em blocos de 1 MB e `status=progress` mostra o andamento:
 
 ```bash
 sudo dd if=/dev/zero of=/zero bs=1M status=progress
@@ -261,13 +269,13 @@ sudo dd if=/dev/zero of=/zero bs=1M status=progress
 
 > ℹ️ O `dd` pode levar alguns minutos e **termina com a mensagem `No space left on device`**. Isso é esperado: ele para quando o disco enche de zeros.
 
-**Passo 3.** Apague o arquivo de zeros. **Não pule este passo**, senão a VM fica com o disco cheio:
+**Passo 4.** Apague o arquivo de zeros. **Não pule este passo**, senão a VM fica com o disco cheio:
 
 ```bash
 sudo rm /zero
 ```
 
-**Passo 4.** Na instalação do laboratório, o `/boot` é uma partição separada, de 1 GB, fora do LVM. Confira se ele aparece numa linha própria:
+**Passo 5.** Na instalação do laboratório, o `/boot` é uma partição separada, de 1 GB, fora do LVM. Confira se ele aparece numa linha própria:
 
 ```bash
 df -h /boot
@@ -285,13 +293,7 @@ E apague o arquivo:
 sudo rm /boot/zero
 ```
 
-**Passo 5.** Apague o histórico de comandos do root e dos usuários:
-
-```bash
-sudo rm -f /root/.bash_history /home/*/.bash_history
-```
-
-**Passo 6.** Limpe o histórico da sessão aberta:
+**Passo 6.** Limpe o histórico da sessão aberta (os comandos desta sessão ainda estão só na memória do terminal):
 
 ```bash
 history -c
@@ -309,15 +311,15 @@ unset HISTFILE
 sudo poweroff
 ```
 
-> Os passos 6, 7 e 8 precisam ser feitos **no mesmo terminal**, nessa ordem.
+> Os passos 6, 7 e 8 precisam ser feitos **no mesmo terminal**, nessa ordem. Como o `unset HISTFILE` impede a gravação, os comandos desta sessão não chegam ao disco.
 
 ---
 
 ## 6. Compactar o disco no computador hospedeiro
 
-Com a VM **desligada** e a limpeza validada, faça um **backup independente da VM inteira, incluindo todos os discos da cadeia de snapshots**. Guarde-o fora da pasta da VM e confira se há espaço livre para o backup e a mesclagem antes de continuar.
+Com a VM **desligada** e a limpeza validada, faça um **backup independente da VM inteira, incluindo todos os discos da cadeia de snapshots**. Guarde-o fora da pasta da VM e confira se há espaço livre para o backup antes de continuar.
 
-No VirtualBox, abra a aba **Snapshots** e **exclua os snapshots pela interface**, aguardando a mesclagem dos discos. Isso preserva o estado atual, mas remove os pontos de restauração; **não restaure snapshots nem apague seus arquivos pelo Explorador de Arquivos**.
+No VirtualBox, abra a aba **Snapshots** e confira se **não sobrou nenhum** (o `antes-da-limpeza` foi excluído no passo 0 da seção 5). Se ainda houver algum, **exclua-o pela interface**, aguardando a mesclagem dos discos. Isso preserva o estado atual, mas remove os pontos de restauração; **não restaure snapshots nem apague seus arquivos pelo Explorador de Arquivos**.
 
 Quando não restar nenhum snapshot, confira novamente a **Localização** do disco em *Configurações → Armazenamento* e use esse caminho no comando de compactação abaixo. Abra o PowerShell no Windows.
 
@@ -365,13 +367,13 @@ Para usar a VM em outro PC: *Arquivo → Importar Appliance*, selecione o `.ova`
 
 ## 8. Checklist
 
-- [ ] Snapshot `antes-da-limpeza`
+- [ ] Snapshot `antes-da-limpeza` criado e apagado antes da zeragem
 - [ ] `apt clean` e `journalctl --vacuum-size`
 - [ ] Kernel em uso conferido com `uname -r`; kernels antigos removidos
 - [ ] (Opcional) Firmware removido, reboot e rede conferidos
 - [ ] Snaps (`snapd`) e `fwupd` removidos, se não usados
 - [ ] `dd` de zeros na raiz (e no `/boot`, se separado) + `rm` do arquivo
-- [ ] Histórico apagado e VM desligada
+- [ ] Histórico apagado **antes** do `dd` e VM desligada
 - [ ] `VBoxManage ... --compact` no `.vdi`
 - [ ] Snapshot `vm-limpa`
 - [ ] (Se precisar) VM exportada para `.ova` com MACs removidos e hash conferido
