@@ -315,7 +315,11 @@ sudo poweroff
 
 ## 6. Compactar o disco no computador hospedeiro
 
-Com a VM **desligada**, abra o PowerShell no Windows.
+Com a VM **desligada** e a limpeza validada, faça um **backup independente da VM inteira, incluindo todos os discos da cadeia de snapshots**. Guarde-o fora da pasta da VM e confira se há espaço livre para o backup e a mesclagem antes de continuar.
+
+No VirtualBox, abra a aba **Snapshots** e **exclua os snapshots pela interface**, aguardando a mesclagem dos discos. Isso preserva o estado atual, mas remove os pontos de restauração; **não restaure snapshots nem apague seus arquivos pelo Explorador de Arquivos**.
+
+Quando não restar nenhum snapshot, confira novamente a **Localização** do disco em *Configurações → Armazenamento* e use esse caminho no comando de compactação abaixo. Abra o PowerShell no Windows.
 
 **Passo 1.** Entre na pasta do VirtualBox:
 
