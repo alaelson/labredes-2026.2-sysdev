@@ -135,10 +135,10 @@ wget https://raw.githubusercontent.com/alaelson/labredes-2026.2-sysdev/main/proj
 Crie cada usuário com o `adduser`, como na [Aula 02](../Aula2.md). Exemplo para o Grupo 0, executado em cada VM:
 
 ```bash
-sudo adduser fulano.tal
-sudo adduser fulustreca.grudes
-sudo adduser beltrano.silva
-sudo adduser cicrano.souza
+sudo adduser --allow-bad-names fulano.tal
+sudo adduser --allow-bad-names fulustreca.grudes
+sudo adduser --allow-bad-names beltrano.silva
+sudo adduser --allow-bad-names cicrano.souza
 sudo adduser novato
 
 # Verificação
